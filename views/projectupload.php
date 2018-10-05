@@ -14,6 +14,10 @@
 -->
 
 <?php
+
+
+
+
     $first = new main();
 
 class main {
@@ -22,13 +26,6 @@ class main {
         $readcvs = file_read::getreadcvs();
         $displaytable = html::printTable($readcvs);
         system::outputTemplate($displaytable);
-
-        /*
-        $csv_file_data = file_read::csv_file_read();
-        $print_table = html::print_table($csv_file_data);
-        system::display_csv_file_data($print_table); */
-
-
     }
 }
 
@@ -71,28 +68,6 @@ class system {
 
         echo $template;
     }
-
-
-        /* per TA Kishore -- this part needs clearificaiton
-        while ($file_content = fgetcsv($csv, 5000, ',')) {
-            echo '<tr>';
-            if ($header){
-                foreach ($file_content as $file_header){
-                    echo "<th class='t'>$file_header</th>";
-                }
-            }
-          else {
-              /*content for column
-              foreach ($file_content as $file_column) {
-                  echo "<td class='t'>$file_column</td>";
-              }
-          }
-        }
-        echo '<tr>';
-    }
-        }
-        echo '</html></table></body>';
-        fclose($csv);*/
 
 }
 
