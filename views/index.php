@@ -9,10 +9,7 @@
 
 <title>Mini Project 1 - IS601:101 by Riya Gandhi</title>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
 </html>
 
@@ -23,69 +20,78 @@ main::start("project1.csv");
 
 class main{
 
-    static public function start($readcsv) {
+    static public function start($projectfile) {
 
-        $Cfile = csv::getRecords($readcsv);
-        $output = html::generateTable($Cfile);
+        $fileinput = csv::getRecords($projectfile);
+        $output = html::generateTable($fileinput);
+        echo $output;
     }
 }
 
+/*create class to get record from file*/
+class csv{
+    static public function getRecords($projectfile) {
+        $readfile = fopen($projectfile, 'r');
+        $field = array();
+        $fileinput = array();
+        $count = 0;
 
-
-
-/**
-$first = new main();
-
-class main {
-    public function _construct() {
-        $readcvs = file_read::getreadcvs();
-        $displaytable = html::printTable($readcvs);
-        system::outputTemplate($displaytable);
-    }
-}
-
-/*  create class to read the CSV file
-class file_read {
-    static public function getreadcvs() {
-        $fname = 'project1.csv';
-        $csv = fopen($fname, "r");
-        return $csv;
-    }
-}
-/* create class to display table
-class html {
-    static public function printTable($cvs) {
-
-        $displaytable = '<html><body><table class="table table-bordered">';
-
-        while ($input = fgetcsv($cvs, 5000, ',')) {
-
-            $displaytable .= '<tr>';
-
-            foreach ($input as $column) {
-
-                $displaytable .="<td>$column</td>";
+        while(!feof($readfile)){
+            $input = fgetcsv($readfile, 5000,',');
+            if($count == 0){
+              $field = $input;
             }
-
-            $displaytable .= '</tr>';
-
+            else{
+                $fileinput[]=recordFactory::create($field,$input);
+            }
+            $count++;
         }
+        fclose($readfile);
+        return $fileinput;
+        }
+}
 
-        $displaytable .= '</table></body></html>';
-        fclose($cvs);
-        return $displaytable;
+/*create class to display table*/
+class html {
+    public static function generateTable($fileinput){
+        $output = self::getHTMLHeader();
+        $count = 0;
+        foreach ($fileinput as $input) {
+            $array = $input->returnArray();
+            if($count == 0) {
+                $fieldkeys = array_keys($array);
+                $output = self:: getString($fieldkeys, $output);
+                }
+            $values = array_values($array);
+            $output = self::getString($values,$output);
+            $count++;
+         }
+         $output.='</table></body></html>';
+         return $output;
+    }
+    public static function getString($array, $output){
+        $output.='<tr>';
+        foreach($array as $value){
+            $output .= $value;
+        }
+        $output.='</tr>';
+        return $output;
+    }
+    public static function getHTMLHeader(){
+        $output =
 
+        return $output;
     }
 }
-class system {
 
-    static public function outputTemplate($template){
 
-        echo $template;
+
+
+
+class recordFactory {
+    public static function create(Array $field = null, Array $input = null){
+        $input = new input($field, $input);
+        return $input;
     }
-
 }
-**/
-
-
 ?>
