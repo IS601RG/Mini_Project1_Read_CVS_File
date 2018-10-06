@@ -1,54 +1,91 @@
 <!--
-/**
  * Created by PhpStorm.
  * User: riya
  * Date: 9/29/18
- * Time: 4:39 PM
- */
+ * Time: 5:28 PM
 -->
 
-<!--
-<!DOCTYPE html>
 <html>
-<head>
-    {% include 'header.html' %}
 
-</head>
--->
-<html>
-<body>
+<title>Mini Project 1 - IS601:101 by Riya Gandhi</title>
 
-<div>
-    <table class="yellowTable">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-        <?php
-        /** wrong file errors  */
-
-        if(isset($_GET['file_error']))
-            if($_GET('file_error'))
-                echo "<tr>
-        <td>Error: Format of the file is wrong. Only .CSV file can be uploaded</td><br>
-        </tr></td>";
-        ?>
-        <tr>
-            <td>
-                <h2><a href="index.php"> Please Resubmit This Page </a><br><br><br>
-
-                 <!--   <h2><br> Format of the file must be in <b>.CSV</b></h2></h2><br><br><br> -->
-
-                    <form action="projectupload.php" method="post" enctype="multipart/form-data" name="file1" id="file1">
-                        <label for="file">Browse to select file</label>
-                        <input type="file" name="file" id="file" /><br><br><br>
-                        <input type="submit" name="submit" value="Submit" />
-                    </form>
-
-            </td>
-        </tr>
-    </table>
-</div>
-
-<!--create footer
-<div id="Footer"></div> -->
-
-</body>
 </html>
+
+
+<?php
+
+main::start("project1.csv");
+
+class main{
+
+    static public function start($readcsv) {
+
+        $Cfile = csv::getRecords($readcsv);
+        $output = html::generateTable($Cfile);
+    }
+}
+
+
+
+
+/**
+$first = new main();
+
+class main {
+    public function _construct() {
+        $readcvs = file_read::getreadcvs();
+        $displaytable = html::printTable($readcvs);
+        system::outputTemplate($displaytable);
+    }
+}
+
+/*  create class to read the CSV file
+class file_read {
+    static public function getreadcvs() {
+        $fname = 'project1.csv';
+        $csv = fopen($fname, "r");
+        return $csv;
+    }
+}
+/* create class to display table
+class html {
+    static public function printTable($cvs) {
+
+        $displaytable = '<html><body><table class="table table-bordered">';
+
+        while ($input = fgetcsv($cvs, 5000, ',')) {
+
+            $displaytable .= '<tr>';
+
+            foreach ($input as $column) {
+
+                $displaytable .="<td>$column</td>";
+            }
+
+            $displaytable .= '</tr>';
+
+        }
+
+        $displaytable .= '</table></body></html>';
+        fclose($cvs);
+        return $displaytable;
+
+    }
+}
+class system {
+
+    static public function outputTemplate($template){
+
+        echo $template;
+    }
+
+}
+**/
+
+
+?>
