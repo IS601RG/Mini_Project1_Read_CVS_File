@@ -14,6 +14,33 @@ class main{
         echo $table;
     }
 }
+/*create .csv function*/
+class csv{
+    static public function getRecords($projectN) {
+        $readfile = fopen($projectN,"r");
+        $field = array();
+        $count = 0;
+        while(! feof($readfile))
+        {
+            $record = fgetcsv($readfile);
+            if($count == 0) {
+                $field = $record;
+            } else {
+                $fileinput[] = recordFactory::create($field, $record);
+            }
+            $count++;
+        }
+        fclose($readfile);
+        return $fileinput;
+    }
+}
+class recordFactory {
+    public static function create(Array $field = null, Array $values = null) {
+        $record = new record($field, $values);
+        return $record;
+    }
+}
+/*read file and generate table*/
 class html {
     public static function generateTable($fileinput) {
         $table = self::getHeader();
@@ -64,28 +91,4 @@ class record {
         $this->{$name} = $value;
     }
 }
-class csv{
-    static public function getRecords($projectN) {
-        $readfile = fopen($projectN,"r");
-        $field = array();
-        $count = 0;
-        while(! feof($readfile))
-        {
-            $record = fgetcsv($readfile);
-            if($count == 0) {
-                $field = $record;
-            } else {
-                $fileinput[] = recordFactory::create($field, $record);
-            }
-            $count++;
-        }
-        fclose($readfile);
-        return $fileinput;
-    }
-}
-class recordFactory {
-    public static function create(Array $field = null, Array $values = null) {
-        $record = new record($field, $values);
-        return $record;
-    }
-}
+
