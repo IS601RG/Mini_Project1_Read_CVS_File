@@ -46,6 +46,24 @@ class html {
         return $table;
     }
 }
+class record {
+    public function __construct(Array $field = null, $values = null )
+    {
+        $record = array_combine($field, $values);
+        foreach ($record as $property => $value) {
+            $this->createProperty($property, $value);
+        }
+    }
+    public function returnArray() {
+        $array = (array) $this;
+        return $array;
+    }
+
+    public function createProperty($name = 'Name', $value = 'Kevin L') {
+
+        $this->{$name} = $value;
+    }
+}
 class csv{
     static public function getRecords($projectN) {
         $readfile = fopen($projectN,"r");
@@ -63,24 +81,6 @@ class csv{
         }
         fclose($readfile);
         return $fileinput;
-    }
-}
-class record {
-    public function __construct(Array $field = null, $values = null )
-    {
-        $record = array_combine($field, $values);
-        foreach ($record as $property => $value) {
-            $this->createProperty($property, $value);
-        }
-    }
-    public function returnArray() {
-        $array = (array) $this;
-        return $array;
-    }
-
-    public function createProperty($name = 'Name', $value = 'Kevin L') {
-
-        $this->{$name} = $value;
     }
 }
 class recordFactory {
