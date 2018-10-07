@@ -58,12 +58,12 @@ class csv {
      */
     static public function getRecords($projectname) {
 
-        $file = fopen($projectname,  "r");
+        $readfile = fopen($projectname,  "r");
         $fieldvalue = array();
         $records = array();
         $count = 0;
-        while(!feof($file)) {
-            $record = fgetcsv($file, 5000, ',');
+        while(!feof($readfile)) {
+            $record = fgetcsv($readfile, 5000, ',');
 
             if($count == 0) {
                 $fieldvalue = $record;
@@ -73,7 +73,7 @@ class csv {
             }
             $count++;
         }
-        fclose($file);
+        fclose($readfile);
         return $records;
     }
 }
