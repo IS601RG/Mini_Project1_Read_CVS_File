@@ -7,48 +7,21 @@
  */
 
 main::start("project1.csv");
-class main{
-    static public function start($projectN){
-        $fileinput = csv::getRecords($projectN);
-        $table = html::generateTable($fileinput);
-        echo $table;
+
+class main {
+
+    static public function start($projectname) {
+        $records =csv::getRecords($projectname);
+        $table = html::generateTable($records);
+        system::display_table($table);
     }
 }
-/*create .csv function*/
-class csv{
-    /**
-     * @param $projectN
-     * @return array
-     */
-    static public function getRecords($projectN) {
-        $readfile = fopen($projectN,"r");
-        $field = array();
-        $count = 0;
-        while(! feof($readfile))
-        {
-            $record = fgetcsv($readfile);
-            if($count == 0) {
-                $field = $record;
-            } else {
-                $fileinput[] = recordFactory::create($field, $record);
-            }
-            $count++;
-        }
-        fclose($readfile);
-        return $fileinput;
-    }
-}
-class recordFactory {
-    public static function create(Array $field = null, Array $values = null) {
-        $record = new record($field, $values);
-        return $record;
-    }
-}
+/*create html class to display table*/
 class html {
-    public static function generateTable($fileinput) {
+    public static function generateTable($records) {
         $table = self::getHeader();
         $count = 0;
-        foreach ($fileinput as $record) {
+        foreach ($records as $record) {
             $array = $record->returnArray();
             if($count == 0) {
                 $fields = array_keys($array);
@@ -76,22 +49,66 @@ class html {
         return $table;
     }
 }
+/*create csv file class to read the file*/
+class csv {
+
+    /**
+     * @param $projectname
+     * @return array
+     */
+    static public function getRecords($projectname) {
+
+        $file = fopen($projectname,  "r");
+        $fieldvalue = array();
+        $records = array();
+        $count = 0;
+        while(!feof($file)) {
+            $record = fgetcsv($file, 5000, ',');
+
+            if($count == 0) {
+                $fieldvalue = $record;
+            }
+            else {
+                $records[] = recordFactory::create($fieldvalue, $record);
+            }
+            $count++;
+        }
+        fclose($file);
+        return $records;
+    }
+}
+class recordFactory {
+
+    public static  function  create(Array $fieldvalue = null, Array $values = null) {
+        $record = new record($fieldvalue, $values);
+        return $record;
+    }
+}
 class record {
-    public function __construct(Array $field = null, $values = null )
-    {
-        $record = array_combine($field, $values);
-        foreach ($record as $property => $value) {
-            $this->createProperty($property, $value);
+
+    public function __construct(Array $fieldvalue =null, $values = null) {
+        if (count($fieldvalue) == count($values)) {
+            $record = array_combine($fieldvalue,$values);
+            foreach ($record as $property => $value) {
+                $this->createProperty($property,$value);
+            }
         }
     }
+    public function createProperty($name = 'Name', $value = 'Kevin L') {
+        $name = '<th>' . $name . '</th>';
+        $value = '<td>' . $value . '</td>';
+        $this->{$name} = $value;
+    }
+
     public function returnArray() {
         $array = (array) $this;
         return $array;
     }
+}
+class system {
 
-    public function createProperty($name = 'Name', $value = 'Kevin L') {
-
-        $this->{$name} = $value;
+    public static function display_table($fileoutput) {
+        echo $fileoutput;
     }
 }
 
