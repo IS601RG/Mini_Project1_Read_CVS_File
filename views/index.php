@@ -16,6 +16,10 @@ class main{
 }
 /*create .csv function*/
 class csv{
+    /**
+     * @param $projectN
+     * @return array
+     */
     static public function getRecords($projectN) {
         $readfile = fopen($projectN,"r");
         $field = array();
@@ -40,7 +44,6 @@ class recordFactory {
         return $record;
     }
 }
-/*read file and generate table*/
 class html {
     public static function generateTable($fileinput) {
         $table = self::getHeader();
