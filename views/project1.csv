@@ -6,7 +6,5 @@ Brazil,2018,Malware,Education,5.27,850056,Hacker Group,Weak Passwords,VPN,65
 France,2018,SQL Injection,Government,80.06,400807,Unknown,Weak Passwords,Firewall,67
 China,2018,Ransomware,Telecommunications,58.28,300898,Nation-state,Unpatched Software,Encryption,18
 Japan,2018,SQL Injection,Healthcare,85.33,786644,Nation-state,Unpatched Software,Antivirus,41
-China,2016,Malware,Healthcare,96.63,808984,Unknown,Weak Passwords,Firewall,26
-Germany,2016,Phishing,Education,48.57,907547,Unknown,Unpatched Software,Firewall,33
 USA,2018,Phishing,Telecommunications,42.46,93999,Nation-state,Social Engineering,Encryption,65
 Australia,2018,DDoS,Healthcare,90.4,536357,Nation-state,Weak Passwords,Encryption,55
