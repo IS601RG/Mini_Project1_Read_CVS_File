@@ -1,7 +1,12 @@
-Name, ID, Class, Grade
-Kevin L, kl209 IT491, B
-Maria Bruno, mrb50, IS601, A
-Jennifer Garcia, jg12, Mgmt615, B
-Olu Rosina, ora40, IT201, C
-Bina Patel, bp709, CHE230, B
-Hari Mohit, hmp8, ENE490, B
+Country,Year,Attack Type,Target Industry,Financial Loss (in Million $),Number of Affected Users,Attack Source,Security Vulnerability Type,Defense Mechanism Used,Incident Resolution Time (in Hours)
+India,2018,Ransomware,Retail,23.79,486810,Hacker Group,Unpatched Software,Antivirus,11
+France,2018,Phishing,Banking,89.77,134364,Nation-state,Zero-day,Antivirus,63
+Brazil,2018,Phishing,Banking,98.75,316891,Hacker Group,Social Engineering,Antivirus,55
+Brazil,2018,Malware,Education,5.27,850056,Hacker Group,Weak Passwords,VPN,65
+France,2018,SQL Injection,Government,80.06,400807,Unknown,Weak Passwords,Firewall,67
+China,2018,Ransomware,Telecommunications,58.28,300898,Nation-state,Unpatched Software,Encryption,18
+Japan,2018,SQL Injection,Healthcare,85.33,786644,Nation-state,Unpatched Software,Antivirus,41
+China,2016,Malware,Healthcare,96.63,808984,Unknown,Weak Passwords,Firewall,26
+Germany,2016,Phishing,Education,48.57,907547,Unknown,Unpatched Software,Firewall,33
+USA,2018,Phishing,Telecommunications,42.46,93999,Nation-state,Social Engineering,Encryption,65
+Australia,2018,DDoS,Healthcare,90.4,536357,Nation-state,Weak Passwords,Encryption,55
